@@ -48,7 +48,7 @@ As for any Java-based solution, you need JRE and Maven to build the project:
 
 # Design 
 The solution is made upon two assumptions:
-- As the files are around 100 MB, we can process them in memory directly. For files in the order of TB, this approach could be wrong.
+- As the files are in the order of hundreds of MB, we can try to process them in memory directly. For files in the order of TB, this approach could be wrong.
 - Performance is more important than memory consumption. 
 
 There are three main steps to accomplish the task:
@@ -56,7 +56,7 @@ There are three main steps to accomplish the task:
 - Order the data structure (a list).
 - Print the result, selecting the values between the percentile limits. 
 
-The process always prints the time invested in each step, and we can see that the third one is almost negligible compared with the other two. In the final version, for a 120 MB file, the first step takes around 1000 ms, 400 ms the second, and less than 100 ms the third one. 
+The process always prints the time invested in each step, and we can see that the third one is almost negligible compared with the other two. 
 
 Thus, the major improvements should be done reading and creating the list and ordering the list. 
 
