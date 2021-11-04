@@ -64,8 +64,11 @@ Thus, the major improvements should be done reading and creating the list and or
 - Also, instead of creating a list of CSV lines, so that we would need to parse each line again in order to compare and order the list, a simple object has been created, extracting the field to be compared and saving the complete CSV to be printed later. Thus, it is only needed to parse de CSV once. 
 - Once we have the list of objects containing the field to be compared and the CSV to be printed, we sort the list with the Java Collections sort methods. Of course, we need an implementation of the Comparator. In this case, we are comparing floats. It would be much faster if we could compare integer values. This could be a way of improvement, maybe extending the object with a new field for the decimal part, and making only integer comparisons. 
 
+# Results
+For a 2.5GB file, in a MacBook Pro 2,3 GHz Intel Core i9 with 8 cores, 64 GB 2667 MHz DDR4, it takes around 13 seconds to be processed. Around 9 seconds to read and build the list, and 4 seconds to order this list. 
 
 # Next steps
 - Build a solution based on disk to be able to handle files on the order of terabytes.
 - Improve the ordering of the list using threads. To do so, we could try to handle several lists, to add values in each one based on the value itself. For example, values below 2 go to the first list, and above 2, to the second one. Then we could use two threads to order both lists, and then merge them. This could be also made configurable, providing a list of intermediate values to fill several lists, order them in parallel, and merge. 
 - As mentioned before, Guava Splitter is better than the String.split() method, but maybe a regex, with a pattern already compiled, would perform better. 
+- Nevertheless, the most promising way to improve the performance seems to be using a producer-consumer pattern while reading the file and creating the list to be ordered. This list implies a parsing, and that parsing is take quite a lot of time. A producer-consumer pattern would imply that the process read a raw-line and several consumers parse and add the proper values to the list. 
