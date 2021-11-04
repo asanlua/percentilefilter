@@ -60,7 +60,7 @@ The process always prints the time invested in each step, and we can see that th
 
 Thus, the major improvements should be done reading and creating the list and ordering the list. 
 
-- For reading and creating the list, the process of reading the file itself is negligible. But we need to parse the CSV to be able to get the results. This could be done typically with a Java split. But the usage of Guava Splitter gave better results.
+- For reading and creating the list, the process of reading the file itself is negligible. But we need to parse the CSV to be able to get the results. This could be done typically with a Java split. But the usage of Guava Splitter gave better results. I've also tried with [univocity] (https://www.univocity.com/pages/univocity_parsers_tutorial) but I didn't obtain a better performance. 
 - Also, instead of creating a list of CSV lines, so that we would need to parse each line again in order to compare and order the list, a simple object has been created, extracting the field to be compared and saving the complete CSV to be printed later. Thus, it is only needed to parse de CSV once. 
 - Once we have the list of objects containing the field to be compared and the CSV to be printed, we sort the list with the Java Collections sort methods. Of course, we need an implementation of the Comparator. In this case, we are comparing floats. It would be much faster if we could compare integer values. This could be a way of improvement, maybe extending the object with a new field for the decimal part, and making only integer comparisons. 
 
